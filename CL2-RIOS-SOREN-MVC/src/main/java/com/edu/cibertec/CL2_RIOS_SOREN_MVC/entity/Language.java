@@ -1,9 +1,7 @@
 package com.edu.cibertec.CL2_RIOS_SOREN_MVC.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
@@ -12,6 +10,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Language {
 
     @Id
@@ -22,4 +22,5 @@ public class Language {
 
     @OneToMany(mappedBy = "language")
     private List<Film> films;
+
 }

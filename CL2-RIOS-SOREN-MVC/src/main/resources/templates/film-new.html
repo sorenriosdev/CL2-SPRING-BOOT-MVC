@@ -25,7 +25,7 @@
       <select id="language" th:field="*{languageId}" class="form-control">
         <option value="" disabled selected>Select a language</option>
         <th:block th:each="language : ${languages}">
-          <option th:value="${language.id}" th:text="${language.name}"></option>
+          <option th:value="${language.languageId}" th:text="${language.name}"></option>
         </th:block>
       </select>
     </div>

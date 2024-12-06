@@ -6,10 +6,13 @@ import com.edu.cibertec.CL2_RIOS_SOREN_MVC.entity.Film;
 import com.edu.cibertec.CL2_RIOS_SOREN_MVC.entity.Language;
 import com.edu.cibertec.CL2_RIOS_SOREN_MVC.repository.FilmRepository;
 import com.edu.cibertec.CL2_RIOS_SOREN_MVC.service.FilmService;
+import jakarta.persistence.Cacheable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +24,7 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public List<FilmDto> findAllFilms() {
-        List<FilmDto> films = new ArrayList<FilmDto>();
+        List<FilmDto> films = new ArrayList<>();
         Iterable<Film> iterable = filmRepository.findAll();
         iterable.forEach(film -> {
             FilmDto filmDto = new FilmDto(film.getFilmId(),
@@ -54,6 +57,7 @@ public class FilmServiceImpl implements FilmService {
 
     }
 
+    @CacheEvict(value = "films", allEntries = true)
     @Override
     public Film saveFilm(FilmDetailDto filmDetailDto) {
         Film film = new Film();
@@ -67,6 +71,9 @@ public class FilmServiceImpl implements FilmService {
         film.setRating(filmDetailDto.rating());
         film.setSpecialFeatures(filmDetailDto.specialFeatures());
 
+        // Agregar esta línea para establecer la fecha de última actualización
+        film.setLastUpdate(new Date());
+
         // Asignar lenguaje
         Language language = new Language();
         language.setLanguageId(filmDetailDto.languageId());
@@ -75,7 +82,7 @@ public class FilmServiceImpl implements FilmService {
         return filmRepository.save(film);
     }
 
-
+    @CacheEvict(value = "films", allEntries = true)
     @Override
     public Boolean updateFilm(FilmDetailDto filmDetailDto) {
         Optional<Film> existingFilmOptional = filmRepository.findById(filmDetailDto.filmId());
@@ -100,7 +107,7 @@ public class FilmServiceImpl implements FilmService {
         return false;
     }
 
-
+    @CacheEvict(value = "films", allEntries = true)
     @Override
     public void deleteFilm(int id) {
         filmRepository.deleteById(id);

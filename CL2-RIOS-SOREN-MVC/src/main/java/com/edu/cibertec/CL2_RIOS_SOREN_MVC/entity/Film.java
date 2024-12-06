@@ -2,9 +2,7 @@ package com.edu.cibertec.CL2_RIOS_SOREN_MVC.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
@@ -13,6 +11,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Film {
 
     @Id
@@ -34,23 +34,13 @@ public class Film {
     @JoinColumn(name = "language_id")
     private Language language;
 
-    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Inventory> inventories;
 
-    @ManyToMany
-    @JoinTable(
-            name = "film_actor",
-            joinColumns = @JoinColumn(name = "film_id"),
-            inverseJoinColumns = @JoinColumn(name = "actor_id")
-    )
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Actor> actors;
 
-    @ManyToMany
-    @JoinTable(
-            name = "film_category",
-            joinColumns = @JoinColumn(name = "film_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Category> categories;
 
 }

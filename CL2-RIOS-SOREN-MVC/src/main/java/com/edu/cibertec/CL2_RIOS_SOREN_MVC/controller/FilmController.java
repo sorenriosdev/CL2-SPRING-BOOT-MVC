@@ -58,13 +58,14 @@ public class FilmController {
 
     @GetMapping("/new")
     public String newFilmForm(Model model) {
-        List<Language> languages = languageService.findAllLanguages(); // Usar el servicio para obtener lenguajes
-        model.addAttribute("film", new FilmDetailDto(null, null, null, null, null, null, null, null, null, null, null, null, null));
-        model.addAttribute("languages", languages); // Pasar lenguajes a la vista
+        List<Language> languages = languageService.findAllLanguages();
+        FilmDetailDto newFilm = new FilmDetailDto(
+                null, "", "", null, null, null, null, null, null, null, null, null, null
+        );
+        model.addAttribute("film", newFilm);
+        model.addAttribute("languages", languages);
         return "film-new";
     }
-
-
 
     @PostMapping("/new")
     public String saveFilm(@ModelAttribute FilmDetailDto filmDetailDto) {
@@ -77,8 +78,7 @@ public class FilmController {
         return "redirect:/films/list";
     }
 
-
-    @DeleteMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteFilm(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         filmService.deleteFilm(id);
         redirectAttributes.addFlashAttribute("message", "Film deleted successfully.");
