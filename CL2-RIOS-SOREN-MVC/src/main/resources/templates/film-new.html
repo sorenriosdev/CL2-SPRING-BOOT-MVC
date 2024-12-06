@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>New Film</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <h1>New Film</h1>
+  <form th:action="@{/films/new}" th:object="${film}" method="post">
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" id="title" th:field="*{title}" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea id="description" th:field="*{description}" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="releaseYear">Release Year:</label>
+      <input type="number" id="releaseYear" th:field="*{releaseYear}" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="language">Language:</label>
+      <select id="language" th:field="*{languageId}" class="form-control">
+        <option value="" disabled selected>Select a language</option>
+        <th:block th:each="language : ${languages}">
+          <option th:value="${language.id}" th:text="${language.name}"></option>
+        </th:block>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="rentalDuration">Rental Duration:</label>
+      <input type="number" id="rentalDuration" th:field="*{rentalDuration}" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="rentalRate">Rental Rate:</label>
+      <input type="number" step="0.01" id="rentalRate" th:field="*{rentalRate}" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="length">Length:</label>
+      <input type="number" id="length" th:field="*{length}" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="replacementCost">Replacement Cost:</label>
+      <input type="number" step="0.01" id="replacementCost" th:field="*{replacementCost}" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="rating">Rating:</label>
+      <input type="text" id="rating" th:field="*{rating}" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="specialFeatures">Special Features:</label>
+      <input type="text" id="specialFeatures" th:field="*{specialFeatures}" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

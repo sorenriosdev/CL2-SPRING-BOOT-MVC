@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Film Details</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header text-center">
+      <h1>Film Details</h1>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <dl class="row">
+            <dt class="col-sm-4">ID:</dt>
+            <dd class="col-sm-8" th:text="${film.filmId}"></dd>
+
+            <dt class="col-sm-4">Title:</dt>
+            <dd class="col-sm-8" th:text="${film.title}"></dd>
+
+            <dt class="col-sm-4">Description:</dt>
+            <dd class="col-sm-8" th:text="${film.description}"></dd>
+
+            <dt class="col-sm-4">Release Year:</dt>
+            <dd class="col-sm-8" th:text="${film.releaseYear}"></dd>
+
+            <dt class="col-sm-4">Language:</dt>
+            <dd class="col-sm-8" th:text="${film.languageName}"></dd>
+
+            <dt class="col-sm-4">Rental Duration:</dt>
+            <dd class="col-sm-8" th:text="${film.rentalDuration}"></dd>
+
+            <dt class="col-sm-4">Rental Rate:</dt>
+            <dd class="col-sm-8" th:text="${film.rentalRate}"></dd>
+
+            <dt class="col-sm-4">Length:</dt>
+            <dd class="col-sm-8" th:text="${film.length}"></dd>
+
+            <dt class="col-sm-4">Replacement Cost:</dt>
+            <dd class="col-sm-8" th:text="${film.replacementCost}"></dd>
+
+            <dt class="col-sm-4">Rating:</dt>
+            <dd class="col-sm-8" th:text="${film.rating}"></dd>
+
+            <dt class="col-sm-4">Special Features:</dt>
+            <dd class="col-sm-8" th:text="${film.specialFeatures}"></dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <a th:href="@{/films/edit/{id}(id=${film.filmId})}" class="btn btn-primary btn-lg">Edit Film</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS and dependencies (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
